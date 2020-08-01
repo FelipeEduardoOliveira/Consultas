@@ -10,11 +10,17 @@ class Register extends Component {
     constructor(porps) {
         super(porps);
         this.state = {
+            name: '',
+            specialty: '',
+            startTime: '',
+            endTime: '',
+            description: '',
 
         }
     }
 
     render() {
+        
         return (
 
             <Container>
@@ -24,15 +30,58 @@ class Register extends Component {
 
                     <Title>Cadastro</Title>
 
-                    <InputText label='Nome' placeholder='Digite Seu nome'/>
-                    <InputText label='Especialidade' placeholder='Digite sua Especialidade'/>
+                    <InputText 
+                    label='Nome' 
+                    placeholder='Digite Seu nome'
+                    value={this.state.name}
+                    onChange={event => {
+                        const { value } = event.target;
+                        this.setState({ name: value });
+                      }}
+                    />
+
+
+                    <InputText 
+                    label='Especialidade' 
+                    placeholder='Digite sua Especialidade'
+                    value={this.state.specialty}
+                    onChange={event => {
+                        const { value } = event.target;
+                        this.setState({ specialty: value });
+                      }}
+                      />
 
 
 
-                    <InputTime label='Inicio' timer='12:00'/>
-                    <InputTime label='Fim' timer='13:00'/>
+                    <InputTime 
+                    label='Inicio' 
+                    value={this.state.startTime}
+                    onChange={event => {
+                        const { value } = event.target;
+                        this.setState({ startTime: value });
+                      }}
+                    />
 
-                    <InputText label='Descrição' placeholder='Digite sua descrição'/>
+                    <InputTime 
+                    label='Fim' 
+                    value={this.state.endTime}
+                    onChange={event => {
+                        const { value } = event.target;
+                        this.setState({ endTime: value });
+                      }}
+                    />
+
+                    
+
+                    <InputText 
+                    label='Descrição' 
+                    placeholder='Digite sua descrição'
+                    value={this.state.description}
+                    onChange={event => {
+                        const { value } = event.target;
+                        this.setState({ description: value });
+                      }}
+                    />
 
                     
                    
@@ -44,6 +93,16 @@ class Register extends Component {
                         
 
                     </ButtonBox>
+
+
+                <div>
+                    <p>Visualizar states</p>
+                    <p>Nome: {this.state.name}</p>
+                    <p>Especialidade: {this.state.specialty}</p>
+                    <p>Inicio: {this.state.startTime}</p>
+                    <p>Fim: {this.state.endTime}</p>
+                    <p>Descrição: {this.state.description}</p>
+                </div>
 
                 </ContainerRegister>
             </Container>

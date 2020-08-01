@@ -11,6 +11,8 @@ function InputText(props){
         variant="outlined" 
         placeholder={props.palceholder} 
         className='AllField' 
+        value = {props.value}
+        onChange= {props.onChange}
         
         />
     );

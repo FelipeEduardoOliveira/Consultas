@@ -57,6 +57,7 @@ class Register extends Component {
 
                     <ButtonBox>
                         <Button
+                            onClick={() => alert('Cancelado')}
                             className='btn'
                             variant="contained"
                             color="secondary">
@@ -64,6 +65,7 @@ class Register extends Component {
                     </Button>
 
                         <Button
+                            onClick={() => alert('Salvo')}
                             className='btn'
                             variant="contained"
                             color='primary'>
@@ -71,7 +73,7 @@ class Register extends Component {
                         </Button>
 
                     </ButtonBox>
-                    
+
                 </ContainerRegister>
             </Container>
         );

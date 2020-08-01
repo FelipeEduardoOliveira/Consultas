@@ -1,7 +1,8 @@
 import Styled from 'styled-components';
 
 export const Container = Styled.div`
-
+display:flex;
+justify-content: center;
 height: 100vh;
 padding: 60px;
 background-color: #DDDD;
@@ -11,6 +12,7 @@ justify-content: center;
 export const ContainerRegister = Styled.div`
 display: flex;
 flex-direction: column;
+width: 950px;
 border-radius: 15px;
 padding: 40px;
 background-color: #FFF;

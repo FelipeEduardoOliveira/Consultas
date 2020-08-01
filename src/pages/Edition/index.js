@@ -22,7 +22,7 @@ class Register extends Component {
 
                 <ContainerRegister>
 
-                    <Title>Cadastro</Title>
+                    <Title>Edição</Title>
 
                     <InputText label='Nome' placeholder='Digite Seu nome'/>
                     <InputText label='Especialidade' placeholder='Digite sua Especialidade'/>

@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { TextField, Button } from '@material-ui/core';
+import ButtonComponent from '../../components/Button/index.js';
+
+import InputTime from '../../components/Inputs/InputTime';
+import InputText from '../../components/Inputs/InputText';
 import { ContainerRegister, Container, Title, ButtonBox } from './styles';
 
 class Register extends Component {
@@ -20,57 +23,24 @@ class Register extends Component {
 
                     <Title>Cadastro</Title>
 
-                    <TextField id="outlined-basic" label="Nome" variant="outlined" placeholder='Seu nome' className='AllField' />
-
-                    <TextField id="outlined-basic" label="Especialidade" variant="outlined" placeholder='Sua especialidade' className='AllField' />
-
-
-                    <TextField
-                        className='WidthFieldTime'
-                        id="date"
-                        label="Inicio"
-                        type="time"
-                        size="normal"
-                        defaultValue="12:00"
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                    />
+                    <InputText label='Nome' placeholder='Digite Seu nome'/>
+                    <InputText label='Especialidade' placeholder='Digite sua Especialidade'/>
 
 
 
-                    <TextField
-                        className='WidthFieldTime'
+                    <InputTime label='Inicio' timer='12:00'/>
+                    <InputTime label='Fim' timer='13:00'/>
 
-                        id="date"
-                        label="Fim"
-                        type="time"
-                        size="normal"
-                        defaultValue="12:00"
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                    />
+                    <InputText label='Descrição' placeholder='Digite sua descrição'/>
 
-                    <TextField type='Text' id="outlined-basic" label="Descrição" variant="outlined" placeholder='Descirção da consulta' className='AllField' />
-
-
+                    
+                   
                     <ButtonBox>
-                        <Button
-                            onClick={() => alert('Cancelado')}
-                            className='btn'
-                            variant="contained"
-                            color="secondary">
-                            Cancelar
-                    </Button>
 
-                        <Button
-                            onClick={() => alert('Salvo')}
-                            className='btn'
-                            variant="contained"
-                            color='primary'>
-                            Salvar
-                        </Button>
+                        <ButtonComponent label='Cancelar' color='secondary'/>
+
+                        <ButtonComponent label='Salvar'color='primary'/>
+                        
 
                     </ButtonBox>
 

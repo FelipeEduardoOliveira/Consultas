@@ -4,6 +4,9 @@ import ButtonComponent from '../../components/Button/index.js';
 import InputTime from '../../components/Inputs/InputTime';
 import InputText from '../../components/Inputs/InputText';
 
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import 'sweetalert2/src/sweetalert2.scss'
+
 import { ContainerRegister, Container, Title, ButtonBox } from './styles';
 
 class Register extends Component {
@@ -17,8 +20,58 @@ class Register extends Component {
             description: '',
 
         }
+        this.cancelButton = this.cancelButton.bind(this);
+        this.saveButton = this.saveButton.bind(this);
     }
 
+    cancelButton(){
+        Swal.fire({
+            title: 'Cuidado',
+            text: "Você quer mesmo cancelar o cadastro?",
+            icon: 'warning',
+            showCancelButton: true,
+            cancelButtonText: 'Não',
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sim'
+          }).then((result) => {
+            if (result.value) {
+                const state = this.setState;
+                state.nome = '';
+                state.specialty = '';
+                state.startTime = '';
+                state.endTime = '';
+                state.description = '';
+                
+                this.setState({
+                    name: '',
+                    specialty: '',
+                    startTime: '',
+                    endTime: '',
+                    description: ''
+                });
+              Swal.fire(
+                'Cancelado!',
+                'O cadastro foi cancelado.',
+                'success'
+              )
+            }
+          })
+    }
+
+    async saveButton(){
+        await Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Your work has been saved',
+            showConfirmButton: false,
+            timer: 1500
+          });
+          this.props.history.replace('/consultas')
+    }
+    
+
+  
     render() {
         
         return (
@@ -86,23 +139,17 @@ class Register extends Component {
                     
                    
                     <ButtonBox>
+                        <a onClick={()=> this.cancelButton()}>
+                        <ButtonComponent label='Cancelar' color='secondary' />
+                        </a>
 
-                        <ButtonComponent label='Cancelar' color='secondary'/>
-
-                        <ButtonComponent label='Salvar'color='primary'/>
-                        
-
+                        <a onClick={() => this.saveButton()}>
+                        <ButtonComponent label='Salvar'color='primary' />
+                        </a>
                     </ButtonBox>
 
 
-                <div>
-                    <p>Visualizar states</p>
-                    <p>Nome: {this.state.name}</p>
-                    <p>Especialidade: {this.state.specialty}</p>
-                    <p>Inicio: {this.state.startTime}</p>
-                    <p>Fim: {this.state.endTime}</p>
-                    <p>Descrição: {this.state.description}</p>
-                </div>
+                
 
                 </ContainerRegister>
             </Container>

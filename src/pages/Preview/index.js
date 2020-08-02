@@ -1,14 +1,45 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { Title, Container, ContainerPreview, Overview, BoxButton } from './styles';
 import { BsFillTrashFill, BsPencilSquare } from 'react-icons/bs';
+
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import 'sweetalert2/src/sweetalert2.scss'
 
 class Preview extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            consultations: []
         }
+        this.excludeButton = this.excludeButton.bind(this);
     }
+
+    excludeButton(){
+        Swal.fire({
+            title: 'Cuidado',
+            text: "Você quer mesmo excluir o cadastro?",
+            icon: 'warning',
+            showCancelButton: true,
+            cancelButtonText: 'Não',
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sim'
+          }).then((result) => {
+            if (result.value) {
+               
+              Swal.fire(
+                'Excluido!',
+                'O cadastro foi excluido.',
+                'success'
+              )
+            }
+          })
+    }
+
+
+
 
     render() {
         return (
@@ -44,17 +75,17 @@ class Preview extends Component {
                         </label>
 
                         <BoxButton>
-                            <a onClick={() => alert('teste')}>
+                            <a onClick={() => this.excludeButton()}>
                                 <BsFillTrashFill
                                     color={'red'}
                                     size={25} />
                             </a>
 
-                            <a onClick={() => alert('teste')}>
+                            <Link to ='/edicao'>
                                 <BsPencilSquare
                                     color={'rgb(85,202,195)'}
                                     size={25} />
-                            </a>
+                            </Link>
                         </BoxButton>
                     </Overview>
 

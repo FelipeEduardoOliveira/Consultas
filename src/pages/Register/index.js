@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import ButtonComponent from '../../components/Button/index.js';
 import InputTime from '../../components/Inputs/InputTime';
 import InputText from '../../components/Inputs/InputText';
+// import axios from 'axios';
+import api from '../../services/api';
 
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import 'sweetalert2/src/sweetalert2.scss'
@@ -22,6 +24,21 @@ class Register extends Component {
         }
         this.cancelButton = this.cancelButton.bind(this);
         this.saveButton = this.saveButton.bind(this);
+    }
+    componentDidMount(){
+      this.loadApi();
+    }
+
+    async loadApi(){
+      const result = await api.get('Consultas').then((response)=>{
+          return response.json;
+      })
+      .then((response)=>{
+        alert(response)
+      })
+      .catch((err)=>{
+        alert(err)
+      })
     }
 
     cancelButton(){
@@ -70,6 +87,18 @@ class Register extends Component {
           this.props.history.replace('/consultas')
     }
     
+    
+
+
+  // async loadApi(){
+  //    const response = await api.get('/Consultas')
+  //    .then(()=>{
+  //      alert('sucesso')
+  //    })
+  //    .catch(()=>{
+  //      alert('sem sucesso ')
+  //    })
+  // }
 
   
     render() {

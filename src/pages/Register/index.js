@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-
+// import api from '../../services/api';
 import ButtonComponent from '../../components/Button/index.js';
 import InputTime from '../../components/Inputs/InputTime';
 import InputText from '../../components/Inputs/InputText';
 // import axios from 'axios';
-import api from '../../services/api';
+
 
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import 'sweetalert2/src/sweetalert2.scss'
@@ -20,26 +20,13 @@ class Register extends Component {
             startTime: '',
             endTime: '',
             description: '',
+            all: []
 
         }
         this.cancelButton = this.cancelButton.bind(this);
         this.saveButton = this.saveButton.bind(this);
     }
-    componentDidMount(){
-      this.loadApi();
-    }
-
-    async loadApi(){
-      const result = await api.get('Consultas').then((response)=>{
-          return response.json;
-      })
-      .then((response)=>{
-        alert(response)
-      })
-      .catch((err)=>{
-        alert(err)
-      })
-    }
+    
 
     cancelButton(){
         Swal.fire({
@@ -90,16 +77,18 @@ class Register extends Component {
     
 
 
-  // async loadApi(){
-  //    const response = await api.get('/Consultas')
-  //    .then(()=>{
-  //      alert('sucesso')
-  //    })
-  //    .catch(()=>{
-  //      alert('sem sucesso ')
-  //    })
-  // }
+    // componentDidMount(){
+    //   this.loadApi();
+    // }
 
+    // async loadApi(){
+    //   const result = await api.delete('/consultas/id/8')
+    //   .then(()=>{
+    //       alert('Sucesso')
+    //   })
+
+
+    // }
   
     render() {
         

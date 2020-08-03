@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import api from '../../services/api';
 import { Link } from 'react-router-dom';
 import { Title, Container, ContainerPreview, Overview, BoxButton } from './styles';
 import { BsFillTrashFill, BsPencilSquare } from 'react-icons/bs';
@@ -16,10 +16,10 @@ class Preview extends Component {
         this.excludeButton = this.excludeButton.bind(this);
     }
 
-    excludeButton(){
+    excludeButton(id){
         Swal.fire({
             title: 'Cuidado',
-            text: "Você quer mesmo excluir o cadastro?",
+            text: `Você quer mesmo excluir o cadastro? ${id}`,
             icon: 'warning',
             showCancelButton: true,
             cancelButtonText: 'Não',
@@ -37,19 +37,72 @@ class Preview extends Component {
             }
           })
     }
+    componentDidMount(){
+        this.loadApi();
+      }
+  
+      async loadApi(){
+        const result = await api.get('/consultas')
+        .then((response)=>{
+            return response.data
+        })
+        this.setState({consultations: result})
+        console.log(result[0]);
 
-
-
+  
+      }
 
     render() {
         return (
             <Container>
                 <ContainerPreview>
-
                     <Title> Consultas agendadas </Title>
 
+                {this.state.consultations.map((item)=>{
+                        return(
+                            <Overview key={item.id}>
+                        <div className='Header'>
+                            <label>
+                                Nome
+                        <p>{item.nome}</p>
+                            </label>
+                            <label>
+                                Especialidade
+                        <p>{item.especialidade}</p>
+                            </label>
+                            <label>
+                                Inicio
+                        <p>{item.inicioConsulta.split("T")[1]}</p>
+                            </label>
+                            <label>
+                                Fim
+                        <p>{item.fimConsulta.split("T")[1]}</p>
+                            </label>
+                        </div>
 
-                    <Overview>
+                        <label className='Descricao'>
+                            Descrição
+                        <p>{item.descricao}</p>
+                        </label>
+
+                        <BoxButton>
+                            <a onClick={() => this.excludeButton(item.id)}>
+                                <BsFillTrashFill
+                                    color={'red'}
+                                    size={25} />
+                            </a>
+
+                            <Link to ='/edicao'>
+                                <BsPencilSquare
+                                    color={'rgb(85,202,195)'}
+                                    size={25} />
+                            </Link>
+                        </BoxButton>
+                    </Overview> 
+                        );
+                })}
+
+                    {/* <Overview>
                         <div className='Header'>
                             <label>
                                 Nome
@@ -87,7 +140,7 @@ class Preview extends Component {
                                     size={25} />
                             </Link>
                         </BoxButton>
-                    </Overview>
+                    </Overview> */}
 
                 </ContainerPreview>
 

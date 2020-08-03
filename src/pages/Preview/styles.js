@@ -1,9 +1,10 @@
 import Styled from 'styled-components';
 
 export const Container = Styled.div`
+
 display: flex;
 justify-content: center;
-height: 100vh;
+min-height: 100vh;
 padding: 40px 60px;
 background-color: #DDDD;
 justify-content: center;
@@ -32,17 +33,18 @@ color: rgb(15,202,195);
 `;
 
 export const Overview = Styled.div`
-max-width: 700px;
+width: 700px;
 padding: 10px 30px;
 display: flex;
 flex-direction: column;
-box-shadow: 1px 7px 21px silver;
+box-shadow: 0px 7px 21px silver;
 border-radius: 20px;
-margin-bottom: 10px;
+margin-bottom: 40px;
 
 label{
         font-weight: bold;
         color: rgb(85,202,195);
+        margin: 0px 30px;
     }
     p{
         margin-top: 0;

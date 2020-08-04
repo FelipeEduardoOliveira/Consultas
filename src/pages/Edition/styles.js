@@ -2,6 +2,7 @@ import Styled from 'styled-components';
 
 export const Container = Styled.div`
 display:flex;
+/* flex-direction: column; */
 justify-content: center;
 height: 100vh;
 padding: 40px 60px;
@@ -25,6 +26,10 @@ background-color: #FFF;
     margin: 15px 0px;
 }
 
+@media(max-width: 523px){
+    width: 100%;
+}
+
 `;
 
 export const Title = Styled.h1`
@@ -42,5 +47,18 @@ export const ButtonBox = Styled.div`
     .btn{
         border-radius: 20px;
         width: 200px;
+    }
+
+    @media(max-width: 523px){
+    .btn{
+        width: 120px
+    }
+
+    @media(max-width: 432px){
+        flex-direction: column;
+        
+    .btn{
+        width: 120px;
+        margin-top: 25px;
     }
 `;

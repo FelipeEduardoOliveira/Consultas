@@ -24,6 +24,9 @@ background-color: #FFF;
 .AllField{
     margin: 15px 0px;
 }
+@media(max-width: 523px){
+    width: 100%;
+}
 
 `;
 
@@ -39,8 +42,32 @@ color: rgb(15,202,195);
 export const ButtonBox = Styled.div`
     display: flex;
     justify-content: space-between;
+
+    .MuiButton-colorInherit{
+    background-color: #21af21cf;
+    color: white;
+}
+
+.MuiButton-colorInherit:hover{
+    background-color: white;
+    color: #21af21cf;
+}
+
     .btn{
         border-radius: 20px;
         width: 200px;
     }
+    @media(max-width: 523px){
+    .btn{
+        width: 120px
+    }
+
+    @media(max-width: 432px){
+        flex-direction: column;
+        
+    .btn{
+        width: 120px;
+        margin-top: 25px;
+    }
+}
 `;

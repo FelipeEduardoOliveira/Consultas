@@ -9,7 +9,7 @@ function ButtonComponent(props) {
             className='btn'
             variant="contained"
             color={props.color}>
-
+            
             {props.label}
 
         </Button>

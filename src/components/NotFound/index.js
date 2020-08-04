@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import {Link} from 'react-router-dom';
 
 import { ContainerRegister, Container,Error } from './styles';
 
@@ -21,13 +21,13 @@ class NotFound extends Component {
 
                 <Error>
                     <nav>
-                        <a>
+                        <Link to={'/'}>
                             Agendar consulta
-                        </a>
+                        </Link>
 
-                        <a>
+                        <Link to={'/Consultas'}>
                             Vizualisar consultas
-                        </a>
+                        </Link>
                     </nav>
                 </Error>
                     

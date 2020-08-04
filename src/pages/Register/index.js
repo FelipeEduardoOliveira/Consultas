@@ -3,7 +3,6 @@ import api from '../../services/api';
 import ButtonComponent from '../../components/Button/index.js';
 import InputTime from '../../components/Inputs/InputTime';
 import InputText from '../../components/Inputs/InputText';
-// import axios from 'axios';
 
 
 import Swal from 'sweetalert2/dist/sweetalert2.js';
@@ -74,6 +73,7 @@ class Register extends Component {
           'success'
         )
       }
+      this.props.history.replace('/consultas')
     })
   }
 
@@ -81,16 +81,7 @@ class Register extends Component {
     const { name, specialty, startTime, endTime, description } = this.state;
 
     this.validateField(name, specialty, startTime, endTime, description)
-    .then(()=>{
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Preecha todos os campos!'
-      })
-    })
-    .catch((e)=>{
-      return console.log(e)
-    })
+  
       await api.post('/Consultas', {
         nome: `${name}`,
           especialidade: `${specialty}`,
@@ -98,18 +89,18 @@ class Register extends Component {
           fimConsulta: `${this.getData()}T${endTime}`,
           descricao: `${description}`
         })
-        .then(()=>{
+        .then( ()=>{
            Swal.fire({
             position: 'top-end',
             icon: 'success',
-            title: 'Your work has been saved',
+            title: 'Sua consulta foi salva com sucesso',
             showConfirmButton: false,
-            timer: 1500
+            timer: 2000
           });
-          // this.props.history.replace('/consultas')
+          this.props.history.replace('/consultas')
         })
         .catch((err)=>{
-          console.log(err)
+         return console.log(err)
         })
    
 
@@ -122,22 +113,46 @@ class Register extends Component {
 
   }
 
-  async validateField(name, specialty, startTime, endTime, description){
-    // const { name, specialty, startTime, endTime, description } = this.state;
-    if (name === '') {
-      return this.setState({inputName: true});
+   validateField(name, specialty, startTime, endTime, description){
+    if (name == '') {
+            Swal.fire({
+             icon: 'error',
+             title: 'Oops...',
+             text: 'Preecha todos os campos!'
+           })
+      this.setState({inputName: true});
     } 
-    if(specialty === ''){
-      return this.setState({inputSpecialty: true});
+    if(specialty == ''){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Preecha todos os campos!'
+      })
+       this.setState({inputSpecialty: true});
     }
-    if(startTime === ''){
-      return this.setState({inputStartTime: true});
+    if(startTime == ''){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Preecha todos os campos!'
+      })
+       this.setState({inputStartTime: true});
     }
-    if(endTime === ''){
-      return this.setState({inputendTime: true})
+    if(endTime == ''){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Preecha todos os campos!'
+      })
+       this.setState({inputendTime: true})
     }
-    if(description === ''){
-      return this.setState({inputDescription: true})
+    if(description == ''){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Preecha todos os campos!'
+      })
+       this.setState({inputDescription: true})
     }
      
   }
@@ -221,10 +236,12 @@ class Register extends Component {
 
 
           <InputText
+            
             error={this.state.inputDescription }
             label='Descrição'
             placeholder='Digite sua descrição'
             value={this.state.description}
+          
             onChange={event => {
               const { value } = event.target;
               this.setState({ description: value });
@@ -235,12 +252,12 @@ class Register extends Component {
 
 
           <ButtonBox>
-            <a onClick={() => this.cancelButton()}>
-              <ButtonComponent label='Cancelar' color='secondary' />
-            </a>
+              <a onClick={() => this.cancelButton()}>
+                <ButtonComponent label='Cancelar' color='secondary' />
+              </a>
 
             <a onClick={() => this.saveButton()}>
-              <ButtonComponent label='Salvar' color='primary' />
+              <ButtonComponent label='Salvar' color='inherit' className='MuiButton-colorInherit'/>
             </a>
           </ButtonBox>
 

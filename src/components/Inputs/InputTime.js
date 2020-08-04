@@ -12,7 +12,6 @@ function InputTime(props){
         label={props.label}
         type="time"
         size="normal"
-        // defaultValue={props.timer}
         value = {props.value}
         onChange= {props.onChange}
         InputLabelProps={{

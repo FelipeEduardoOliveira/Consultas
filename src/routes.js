@@ -12,7 +12,7 @@ function Routes() {
             <Switch>
                 <Route exact path='/' component={Register} />
                 <Route exact path='/consultas' component={Preview} />
-                <Route exact path='/edicao' component={Edition} />
+                <Route exact path='/edicao/:id' component={Edition} />
 
                 <Route path="*" component={NotFound} />
 

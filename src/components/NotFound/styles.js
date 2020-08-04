@@ -19,6 +19,9 @@ padding: 40px;
 background-color: #FFF;
 
 a{
+  text-decoration: none;
+  color: black;
+  background-color: #FDDE;
   padding: 20px;
   margin: 20px;
   font-size: 27px;
@@ -28,7 +31,6 @@ a{
 }
 a:hover{
   cursor: pointer;
-  /* background-color: silver;  */
   font-size: 28px; 
   border-color: green;
   transition: all 0.30s;

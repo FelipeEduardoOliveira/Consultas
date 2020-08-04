@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import api from '../../services/api';
 import { Link } from 'react-router-dom';
+import Logo from '../../img/Logo.png'
 import { Title, Container, ContainerPreview, Overview, BoxButton } from './styles';
 import { BsFillTrashFill, BsPencilSquare } from 'react-icons/bs';
+import ButtonComponent from '../../components/Button/';
 
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import 'sweetalert2/src/sweetalert2.scss'
@@ -88,6 +90,18 @@ class Preview extends Component {
     render() {
         return (
             <Container>
+                <div className='HeaderWithLogo'>
+                
+                <Link >
+                <img src={Logo} style={{width: 100, height: 100}}/>
+            </Link>
+
+
+               <Link to={'/'}>
+              <ButtonComponent label='Adicionar novo' color='inherit' className='MuiButton-colorInherit'/>
+            </Link>
+
+            </div>
                 <ContainerPreview>
                     <Title> Consultas agendadas </Title>
 
@@ -125,7 +139,7 @@ class Preview extends Component {
                                     size={25} />
                             </a>
 
-                            <Link to ='/edicao'>
+                            <Link to={`/edicao/${item.id}`}>
                                 <BsPencilSquare
                                     color={'rgb(85,202,195)'}
                                     size={25} />

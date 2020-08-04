@@ -5,7 +5,7 @@ import { TextField } from '@material-ui/core';
 function InputText(props){
     return(
         <TextField 
-                    
+        error = {props.error}
         id="outlined-basic" 
         label= {props.label} 
         variant="outlined" 

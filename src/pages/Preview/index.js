@@ -14,40 +14,69 @@ class Preview extends Component {
             consultations: []
         }
         this.excludeButton = this.excludeButton.bind(this);
+        this.delConsl = this.delConsl.bind(this);
     }
+    
+    
+    componentDidMount(){
+        this.loadApi();
+      }
+  
 
     excludeButton(id){
         Swal.fire({
             title: 'Cuidado',
-            text: `Você quer mesmo excluir o cadastro? ${id}`,
+            text: `Você quer mesmo excluir o cadastro?`,
             icon: 'warning',
             showCancelButton: true,
             cancelButtonText: 'Não',
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Sim'
-          }).then((result) => {
+          })
+          .then((result) => {
+  
             if (result.value) {
-               
-              Swal.fire(
+
+                this.delConsl(id);
+                }else{
+                    Swal.fire(
+                        'Certo!',
+                        'Ação cancelada.',
+                        'info'
+                      )
+                }
+                
+            
+          })
+
+          
+    }
+
+    async delConsl(id){
+        await api.delete(`/consultas/id/${id}`)
+        .then(()=>{
+            Swal.fire(
                 'Excluido!',
                 'O cadastro foi excluido.',
                 'success'
               )
-            }
-          })
+        })
+        .catch(()=>{
+            Swal.fire(
+                'Erro!',
+                'Erro ao tentar excluir.',
+                'warning'
+              )
+        })
     }
-    componentDidMount(){
-        this.loadApi();
-      }
-  
+    
       async loadApi(){
         const result = await api.get('/consultas')
         .then((response)=>{
             return response.data
         })
         this.setState({consultations: result})
-        console.log(result[0]);
 
   
       }
@@ -102,45 +131,6 @@ class Preview extends Component {
                         );
                 })}
 
-                    {/* <Overview>
-                        <div className='Header'>
-                            <label>
-                                Nome
-                        <p>Dr. Felipe Oliveira</p>
-                            </label>
-                            <label>
-                                Especialidade
-                        <p>Cardiologista</p>
-                            </label>
-                            <label>
-                                Inicio
-                        <p>12:00</p>
-                            </label>
-                            <label>
-                                Fim
-                        <p>12:30</p>
-                            </label>
-                        </div>
-
-                        <label className='Descricao'>
-                            Descrição
-                        <p>Aqui seria a descrição do atendimento, por exemplo, o paciente quer passar com o cardiologista, os sintomas que veem sentindo, por quanto tempo e etc...</p>
-                        </label>
-
-                        <BoxButton>
-                            <a onClick={() => this.excludeButton()}>
-                                <BsFillTrashFill
-                                    color={'red'}
-                                    size={25} />
-                            </a>
-
-                            <Link to ='/edicao'>
-                                <BsPencilSquare
-                                    color={'rgb(85,202,195)'}
-                                    size={25} />
-                            </Link>
-                        </BoxButton>
-                    </Overview> */}
 
                 </ContainerPreview>
 

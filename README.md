@@ -1,3 +1,18 @@
+Ao baixar o projeto, devemos dar o comando yarn add react-script para que o projeto possa rodar com sucesso! 
+
+Um atalho do google deve ser criado com a seguinte regra na frente **     --disable-web-security --user-data-dir="c:/chromedev"       **
+
+Para que possamos acessar a api livrimente 
+
+
+
+
+
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

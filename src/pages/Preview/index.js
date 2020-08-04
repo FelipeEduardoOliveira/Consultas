@@ -56,6 +56,10 @@ class Preview extends Component {
     async delConsl(id){
         await api.delete(`/consultas/id/${id}`)
         .then(()=>{
+            this.setState({consultations: []});
+
+            this.loadApi();
+            
             Swal.fire(
                 'Excluido!',
                 'O cadastro foi excluido.',

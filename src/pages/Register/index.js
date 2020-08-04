@@ -21,11 +21,23 @@ class Register extends Component {
       endTime: '',
       description: '',
 
+
+      inputName: false,
+      inputSpecialty: false,
+      inputStartTime: false,
+      inputendTime: false,
+      inputDescription: false
+
+
     }
     this.cancelButton = this.cancelButton.bind(this);
     this.saveButton = this.saveButton.bind(this);
+    this.getData = this.getData.bind(this);
+    this.validateField = this.validateField.bind(this);
   }
 
+
+  
 
   cancelButton() {
     
@@ -54,6 +66,7 @@ class Register extends Component {
           startTime: '',
           endTime: '',
           description: ''
+          
         });
         Swal.fire(
           'Cancelado!',
@@ -67,41 +80,81 @@ class Register extends Component {
   async saveButton() {
     const { name, specialty, startTime, endTime, description } = this.state;
 
-    if (name === '' || specialty === '' || startTime === '' || endTime === '' || description === '') {
-      return Swal.fire(
-        'Ops...',
-        'Verifique os campos em branco! ',
-        'error'
-      )
-    } else {
-    //  await api.post('/Consultas', {
-    //    id: '14',
-    //     nome: 'name',
-    //     especialidade: 'specialty',
-    //     inicioConsulta: 'startTime',
-    //     fimConsulta: 'endTime',
-    //     descricao: 'description'
-    //   })
-    //   .then({})
-    //   .catch((err)=>{
-    //     alert(err)
-    //   })
+    this.validateField(name, specialty, startTime, endTime, description)
+    .then(()=>{
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Preecha todos os campos!'
+      })
+    })
+    .catch((e)=>{
+      return console.log(e)
+    })
+      await api.post('/Consultas', {
+        nome: `${name}`,
+          especialidade: `${specialty}`,
+          inicioConsulta: `${this.getData()}T${startTime}`,
+          fimConsulta: `${this.getData()}T${endTime}`,
+          descricao: `${description}`
+        })
+        .then(()=>{
+           Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Your work has been saved',
+            showConfirmButton: false,
+            timer: 1500
+          });
+          // this.props.history.replace('/consultas')
+        })
+        .catch((err)=>{
+          console.log(err)
+        })
+   
 
-      await Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Your work has been saved',
-        showConfirmButton: false,
-        timer: 1500
-      });
-      this.props.history.replace('/consultas')
-    }
+
+     
+    
+      
+   
+     
 
   }
 
+  async validateField(name, specialty, startTime, endTime, description){
+    // const { name, specialty, startTime, endTime, description } = this.state;
+    if (name === '') {
+      return this.setState({inputName: true});
+    } 
+    if(specialty === ''){
+      return this.setState({inputSpecialty: true});
+    }
+    if(startTime === ''){
+      return this.setState({inputStartTime: true});
+    }
+    if(endTime === ''){
+      return this.setState({inputendTime: true})
+    }
+    if(description === ''){
+      return this.setState({inputDescription: true})
+    }
+     
+  }
+
   
+ getData(data = new Date()){
+  var day = data.getDate();
+  var month = data.getMonth()+1;
+  var year = data.getFullYear();
+  
+  if(day.toString().length === 1) day = '0'+day  
+  if(month.toString().length == 1){
+     month = '0' + month
+  }
 
-
+    return year+'-'+month+'-'+day;
+}
 
 
   render() {
@@ -116,60 +169,66 @@ class Register extends Component {
           <Title>Cadastro</Title>
 
           <InputText
-            error={this.state.name ? false : true}
+            error={this.state.inputName }
             label='Nome'
             placeholder='Digite Seu nome'
             value={this.state.name}
             onChange={event => {
               const { value } = event.target;
               this.setState({ name: value });
+              this.setState({inputName: false})
             }}
           />
 
 
           <InputText
-            error={this.state.specialty ? false : true}
+            error={this.state.inputSpecialty }
             label='Especialidade'
             placeholder='Digite sua Especialidade'
             value={this.state.specialty}
             onChange={event => {
               const { value } = event.target;
               this.setState({ specialty: value });
+              this.setState({inputSpecialty: false})
             }}
           />
 
 
 
           <InputTime
-            error={this.state.startTime ? false : true}
+            error={this.state.inputStartTime }
             label='Inicio'
             value={this.state.startTime}
             onChange={event => {
               const { value } = event.target;
               this.setState({ startTime: value });
+              this.setState({inputStartTime: false})
             }}
+            
           />
 
           <InputTime
-            error={this.state.endTime ? false : true}
+            error={this.state.inputendTime }
             label='Fim'
             value={this.state.endTime}
             onChange={event => {
               const { value } = event.target;
               this.setState({ endTime: value });
+              this.setState({inputendTime: false})
             }}
           />
 
 
 
           <InputText
-            error={this.state.description ? false : true}
+            error={this.state.inputDescription }
             label='Descrição'
             placeholder='Digite sua descrição'
             value={this.state.description}
             onChange={event => {
               const { value } = event.target;
               this.setState({ description: value });
+              this.setState({inputDescription: false})
             }}
           />
 
